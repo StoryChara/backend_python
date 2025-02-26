@@ -1,0 +1,68 @@
+-- Diagrama Realizado en: https://www.plantuml.com/
+
+@startuml Guarderia
+!theme reddress-darkred
+class Concentrado {
+    - nombre: str
+    - precio: float
+    - calorias: int
+    - registro_invima: str
+    + get_nombre(): str
+    + get_precio(): float
+    + get_calorias(): int
+    + dar_informacion(): str
+    + calcular_rentabilidad(): float
+}
+
+class Cuidandero {
+    - nombre: str
+    - identificacion: int
+    + get_nombre(): str
+    + get_identificacion(): int
+    + set_nombre(nombre: str): None
+    + set_identificacion(identificacion: int): None
+}
+
+class Perro {
+    - nombre: str
+    - raza: str
+    - edad: int
+    - peso: float
+    - concentrado_fav: Concentrado
+    + get_nombre(): str
+    + get_raza(): str
+    + get_edad(): int
+    + get_peso(): float
+    + get_concentrado(): Concentrado
+    + set_nombre(nombre: str): None
+    + set_raza(raza: str): None
+    + set_edad(edad: int): None
+    + set_peso(peso: float): None
+    + set_concentrado(concentrado: Concentrado): None
+    + ladrar(): str
+    + cambio_peso(nuevo_peso: float): None
+}
+
+class Guarderia {
+    - nombre: str
+    - ubicacion: str
+    - perros: list
+    - concentrados: list
+    - cuidandero: Cuidandero
+    + set_nombre(nombre: str): None
+    + set_ubicacion(ubicacion: str): None
+    + set_cuidandero(cuidandero: Cuidandero): None
+    + set_new_perro(perro: Perro): None
+    + set_new_concentrado(concentrado: Concentrado): None
+    + get_nombre(): str
+    + get_ubicacion(): str
+    + get_cuidandero(): Cuidandero
+    + get_perros(): list
+    + get_concentrados(): list
+}
+
+Guarderia --> "1" Cuidandero
+Guarderia --> "*" Perro
+Guarderia --> "*" Concentrado
+Perro --> "1" Concentrado
+@enduml
