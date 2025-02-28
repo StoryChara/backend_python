@@ -1,0 +1,84 @@
+@startuml Taller_4
+!theme reddress-darkred
+interface iAnimal {
+    + comer(kilos: float) : void
+    + obtener_kilos_comidos() : float
+}
+
+class Animal implements iAnimal {
+    - nombre: str
+    - edad: int
+    - peso: float
+    + Animal(nombre: str, edad: int, peso: float)
+    + get_nombre() : str
+    + get_edad() : int
+    + get_peso() : float
+    + set_nombre(nombre: str) : void
+    + set_edad(edad: int) : void
+    + set_peso(peso: float) : void
+    + comer(kilos: float) : void
+    + obtener_kilos_comidos() : float
+    + hacer_sonido() : void
+}
+
+class Animal_Exotico extends Animal {
+    - pais_origen: str
+    - impuestos: float
+    + Animal_Exotico(nombre: str, peso: float, edad: int, pais_origen: str, impuestos: float)
+    + get_pais_origen() : str
+    + get_impuestos() : float
+    + set_pais_origen(pais: str) : void
+    + set_impuestos(impuestos: float) : void
+    + calcular_flete() : float
+}
+
+class Animal_Granja extends Animal {
+    - kilos_comidos: float
+    + Animal_Granja(nombre: str, peso: float, edad: int)
+    + comer(kilos: float) : void
+    + obtener_kilos_comidos() : float
+}
+
+class Gato extends Animal {
+    - color: str
+    + Gato(nombre: str, color: str, edad: int, peso: float)
+    + get_color() : str
+    + set_color(color: str) : void
+    + hacer_sonido() : str
+}
+
+class Perro extends Animal {
+    - raza: str
+    + Perro(nombre: str, raza: str, edad: int, peso: float)
+    + get_raza() : str
+    + set_raza(raza: str) : void
+    + hacer_sonido() : str
+}
+
+class Boa_Constrictor extends Animal_Exotico {
+    - ratones_comidos: int
+    + Boa_Constrictor(nombre: str, peso: float, edad: int, pais_origen: str, impuestos: float)
+    + get_ratones_comidos() : int
+    + set_ratones_comidos(ratones: int) : void
+    + sumar_raton_comido() : void
+    + hacer_sonido() : str
+}
+
+class Huron extends Animal_Exotico {
+    + Huron(nombre: str, peso: float, edad: int, pais_origen: str, impuestos: float)
+    + hacer_sonido() : str
+}
+
+class Guarderia {
+    - nombre: str
+    - ubicacion: str
+    - animales: list
+    + Guarderia(nombre: str, ubicacion: str)
+    + get_nombre() : str
+    + get_ubicacion() : str
+    + get_animales() : list
+    + set_nombre(nombre: str) : void
+    + set_ubicacion(ubicacion: str) : void
+    + add_animal(animal) : void
+}
+@enduml

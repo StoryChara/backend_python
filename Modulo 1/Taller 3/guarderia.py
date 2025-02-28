@@ -3,10 +3,10 @@ from concentrado import Concentrado
 from cuidandero import Cuidandero
 
 class Guarderia:
-    def __init__(self, nombre: str, ubicacion: str, perros: list, concentrados:list, cuidandero: Cuidandero):
+    def __init__(self, nombre: str, ubicacion: str, animales: list, concentrados:list, cuidandero: Cuidandero):
         self.__nombre = nombre
         self.__ubicacion = ubicacion
-        self.__perros = perros  # Sé que me pide solo 3 perros como variables diferentes pero considero que una lista es mucho más útil
+        self.__animales = animales  # Sé que me pide solo 3 perros como variables diferentes pero considero que una lista es mucho más útil
         self.__concentrados = concentrados
         self.__cuidandero = cuidandero
 
