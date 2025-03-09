@@ -1,0 +1,100 @@
+@startuml Proyecto_1
+!theme reddress-darkred
+' Definición de interfaces y clases abstractas
+interface IProducto {
+    +calcular_costo(): float
+    +calcular_rentabilidad(): float
+    +calcular_calorias(): float
+}
+
+abstract class Ingrediente {
+    - nombre: str
+    - precio: float
+    - calorias: int
+    - inventario: int
+    - es_vegetariano: bool
+    + get_nombre(): str
+    + get_precio(): float
+    + get_calorias(): int
+    + get_inventario(): int
+    + get_es_vegetariano(): bool
+    + abastecer(): void
+    + gastar(): void
+}
+
+' Clases que heredan de Ingrediente
+class Base {
+    - sabor: str
+    + get_sabor(): str
+    + set_sabor(sabor: str): void
+    + abastecer(): void
+    + gastar(): void
+}
+
+class Complemento {
+    + abastecer(): void
+    + gastar(): void
+}
+
+' Clases que implementan IProducto
+class Copa {
+    - nombre: str
+    - precio_publico: float
+    - tipo_vaso: str
+    - ingrediente1: Ingrediente
+    - ingrediente2: Ingrediente
+    - ingrediente3: Ingrediente
+    + get_nombre(): str
+    + get_precio_publico(): float
+    + get_tipo_vaso(): str
+    + calcular_costo(): float
+    + calcular_rentabilidad(): float
+    + calcular_calorias(): float
+}
+
+class Malteada {
+    - nombre: str
+    - precio_publico: float
+    - volumen: int
+    - ingrediente1: Ingrediente
+    - ingrediente2: Ingrediente
+    - ingrediente3: Ingrediente
+    + get_nombre(): str
+    + get_precio_publico(): float
+    + get_volumen(): int
+    + calcular_costo(): float
+    + calcular_rentabilidad(): float
+    + calcular_calorias(): float
+}
+
+' Clase principal
+class Heladeria {
+    - producto1: IProducto
+    - producto2: IProducto
+    - producto3: IProducto
+    - producto4: IProducto
+    - inventario: list<Ingrediente>
+    - contador_ventas: int
+    + get_productos(): tuple
+    + get_inventario(): list
+    + get_contador_ventas(): int
+    + producto_mas_rentable(): str
+    + vender(nombre_producto: str): bool
+}
+
+' Relaciones entre clases
+IProducto <|.. Copa
+IProducto <|.. Malteada
+
+Ingrediente <|-- Base
+Ingrediente <|-- Complemento
+
+Base -- Copa 
+Complemento -- Copa
+
+Base -- Malteada 
+Complemento -- Malteada
+
+Heladeria "1" -- "4" IProducto 
+Heladeria "1" -- "*" Ingrediente
+@enduml
