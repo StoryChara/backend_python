@@ -18,3 +18,7 @@ class Complemento(Ingrediente):
      def renovar_inventario(self, cantidad: int):
           """Restaura el inventario a 'cantidad' unidades."""
           self._inventario += cantidad
+
+     def acabar_inventario(self):
+          """Baja el inventario a 0 debido a baja rotación."""
+          self._inventario = 0
