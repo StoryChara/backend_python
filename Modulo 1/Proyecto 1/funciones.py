@@ -8,11 +8,11 @@ def contar_calorias(ingredientes_calorias: list[int]) -> float:
 
 def calcular_costo(ingrediente1: dict[str, float], ingrediente2: dict[str, float], ingrediente3: dict[str, float]) -> float:
     """Calcula el costo total de producción de un producto sumando los precios de los tres ingredientes."""
-    return ingrediente1["precio"] + ingrediente2["precio"] + ingrediente3["precio"]
+    return round(ingrediente1["precio"] + ingrediente2["precio"] + ingrediente3["precio"], 2)
 
 def calcular_rentabilidad(precio_venta: float, ingrediente1: dict[str, float], ingrediente2: dict[str, float], ingrediente3: dict[str, float]) -> float:
     """Calcula la rentabilidad de un producto restando su costo de producción al precio de venta."""
-    return precio_venta - calcular_costo(ingrediente1, ingrediente2, ingrediente3)
+    return round(precio_venta - calcular_costo(ingrediente1, ingrediente2, ingrediente3), 2)
 
 def producto_mas_rentable(producto1: dict[str, float], producto2: dict[str, float], producto3: dict[str, float], producto4: dict[str, float]) -> str:
     """Encuentra el producto con mayor rentabilidad y retorna su nombre."""
