@@ -6,11 +6,11 @@ from complemento import Complemento
 from iproducto import IProducto
 import funciones as fn
 
-class Heladeria:
+class Heladeria():
      """Clase que representa una heladería."""
 
      def __init__(self, producto1: IProducto, producto2: IProducto, producto3: IProducto, producto4: IProducto, ingredientes: list[Ingrediente]):
-          """Inicializa la heladería con su nombre, una lista de productos y un inventario de ingredientes."""
+          """Inicializa la heladería con una lista de productos y un inventario de ingredientes."""
           self._producto1 = producto1
           self._producto2 = producto2
           self._producto3 = producto3
@@ -20,7 +20,7 @@ class Heladeria:
 
      # Getters
      def get_productos(self) -> tuple:
-          return self._producto1, self._producto2, self._producto3
+          return self._producto1, self._producto2, self._producto3, self._producto4
 
      def get_inventario(self) -> list:
           return self._inventario

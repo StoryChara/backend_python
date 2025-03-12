@@ -1,7 +1,7 @@
 from ingrediente import Ingrediente
 
 class Complemento(Ingrediente):
-     def __init__(self, nombre: str, precio: float, calorias: int, inventario: int, es_vegetariano: bool):
+     def __init__(self, nombre: str, precio: float, calorias: int, inventario: float, es_vegetariano: bool):
           """Inicializa un complemento con los atributos heredados de ingrediente."""
           super().__init__(nombre, precio, calorias, inventario, es_vegetariano)
 

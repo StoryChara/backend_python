@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from funciones import es_sano
+import funciones as fn
 
 class Ingrediente(ABC):
-    def __init__(self, nombre: str, precio: float, calorias: int, inventario: int, es_vegetariano: bool):
+    def __init__(self, nombre: str, precio: float, calorias: int, inventario: float, es_vegetariano: bool):
         """Inicializa un ingrediente con nombre, precio, calorías, inventario y si es vegetariano."""
         self._nombre = nombre
         self._precio = precio
@@ -52,7 +52,7 @@ class Ingrediente(ABC):
     # Funciones
     def es_sano(self) -> bool:
         """Determina si un ingrediente es sano (menos de 100 calorías o vegetariano)."""
-        return es_sano(self._calorias, self._es_vegetariano)
+        return fn.es_sano(self._calorias, self._es_vegetariano)
 
     @abstractmethod
     def abastecer(self, cantidad: int):

@@ -1,7 +1,7 @@
 from ingrediente import Ingrediente
 
 class Base(Ingrediente):
-     def __init__(self, nombre: str, precio: float, calorias: int, inventario: int, es_vegetariano: bool, sabor: str):
+     def __init__(self, nombre: str, precio: float, calorias: int, inventario: float, es_vegetariano: bool, sabor: str):
           """Inicializa una base con los atributos heredados de ingrediente y su sabor."""
           super().__init__(nombre, precio, calorias, inventario, es_vegetariano)
           self._sabor = sabor
