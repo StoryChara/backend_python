@@ -4,7 +4,7 @@ def es_sano(calorias: int, vegetariano: bool) -> bool:
 
 def contar_calorias(ingredientes_calorias: list[int]) -> float:
     """Calcula el conteo total de calorías de un producto, aplicando un factor de reducción del 5%."""
-    return round(sum(ingredientes_calorias) * 0.95, 2)
+    return round(sum(ingredientes_calorias), 2)
 
 def calcular_costo(ingrediente1: dict[str, float], ingrediente2: dict[str, float], ingrediente3: dict[str, float]) -> float:
     """Calcula el costo total de producción de un producto sumando los precios de los tres ingredientes."""

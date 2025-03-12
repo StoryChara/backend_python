@@ -22,7 +22,7 @@ class Copa(IProducto):
      def calcular_calorias(self) -> float:
           """Calcula el total de calorías de la copa usando la fórmula con 0.95."""
           calorias_lista = [self._ingrediente1.get_calorias(), self._ingrediente2.get_calorias(), self._ingrediente3.get_calorias()]
-          return fn.contar_calorias(calorias_lista)
+          return round(fn.contar_calorias(calorias_lista) * 0.95, 2)
 
      def calcular_rentabilidad(self) -> float:
           """Calcula la rentabilidad de la copa restando el costo del precio público."""
