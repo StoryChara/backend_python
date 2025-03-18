@@ -1,0 +1,14 @@
+-- Punto 1 | Lassie 
+SELECT * FROM TABLAS.PERRO WHERE Nombre="Lassie";
+
+-- Punto 2 | Los perros de Mario
+SET SQL_SAFE_UPDATES = 0;
+SELECT ID_Cuidador INTO @ID_Mario FROM CUIDADOR WHERE Nombre = 'Mario';
+UPDATE PERRO SET ID_CUIDADOR=@ID_Mario WHERE Peso<3;
+SELECT * FROM PERRO WHERE ID_CUIDADOR=@ID_Mario;
+
+-- PUNTO 3 | Guadería la Favorita
+SELECT * FROM TABLAS.GUARDERIAS G 
+JOIN TABLAS.CUIDADOR C ON G.ID_Guarderia = C.ID_GUARDERIA
+JOIN TABLAS.PERRO P ON G.ID_Guarderia = P.ID_GUARDERIA
+WHERE G.Nombre = "La Favorita";

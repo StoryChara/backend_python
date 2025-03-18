@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset='utf-8'>
+     <meta name="viewport" content="device-width, initial-scale=1.0">
+     <title>Taller 2 - Modulo 2</title>
+</head>
+<body>
+     {% for perro in perros %}
+     <h1>Este es {{ perro.nombre }}!</h1>
+     <h2>Es un hermosx {{ perro.raza }}!</h2>
+     Edad: {{ perro.edad }} | Peso: {{ perro.peso }}
+     {% endfor %}
+</body>
+</html>
