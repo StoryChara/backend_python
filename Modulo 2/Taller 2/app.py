@@ -31,6 +31,7 @@ class Cuidador(db.Model):
     ID_Cuidador = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Nombre = db.Column(db.String(45), nullable=False)
     Telefono = db.Column(db.String(20), nullable=False)
+    ID_GUARDERIA = db.Column(db.Integer, nullable=False)
 
 class Perro(db.Model):
     __tablename__ = 'PERRO'
@@ -39,6 +40,8 @@ class Perro(db.Model):
     Raza = db.Column(db.String(45), nullable=False)
     Edad = db.Column(db.Integer, nullable=False)
     Peso = db.Column(db.Numeric(10, 2), nullable=False)
+    ID_GUARDERIA = db.Column(db.Integer, nullable=False)
+    ID_CUIDADOR = db.Column(db.Integer, nullable=False)
 
 ## WEBSITE -------------------------------- ##
 
@@ -61,8 +64,10 @@ def index():
 def punto_5():
     lassie_dogs = Perro.query.filter_by(Nombre="Lassie").all()
 
-    id_mario = Cuidador.query.filter_by(Nombre="Mario").first()
-    perros_mario = Perro.query.filter(Perro.Peso<3).all()
+    id_mario = Cuidador.query.filter_by(Nombre="Mario").first().ID_Cuidador
+    Perro.query.filter(Perro.Peso < 3).update({"ID_CUIDADOR": id_mario}, synchronize_session=False)
+    db.session.commit()
+    perros_mario = Perro.query.filter_by(ID_CUIDADOR=id_mario).all()
     return render_template('punto_5.html', lassie=len(lassie_dogs), mario=id_mario, perros=perros_mario)
 
 if __name__ == '__main__':

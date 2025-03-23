@@ -8,7 +8,7 @@
 <body>
      <h1>Hola!</h1>
      <p>Hay {{ lassie }} perros llamados Lassie.</p>
-     <p>Mario tiene un ID {{mario.ID_Cuidador}} y estos son sus perros asignados:</p>
+     <p>Mario tiene un ID {{mario}} y estos son sus perros asignados:</p>
      {% for perro in perros %}
          <p> Nombre: {{ perro.Nombre }} | Raza: {{ perro.Raza }} | Edad: {{ perro.Edad }} | Peso: {{ perro.Peso }} </p>
      {% endfor %}
