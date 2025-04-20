@@ -10,3 +10,6 @@
 [submodule "Modulo 3/Taller 2"]
 	path = Modulo 3/Taller 2
 	url = https://github.com/StoryChara/TALLER2-mjarah.git
+[submodule "Modulo 3/Proyecto 3"]
+	path = Modulo 3/Proyecto 3
+	url = https://github.com/StoryChara/PROYECTO3-mjarah.git
