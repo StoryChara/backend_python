@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login</title>
+</head>
+<body>
+     <h1>Perfil de Usuario</h1>
+     <ul>
+          <li>Nombre: {{ usuario.Username }}</li>
+          <li>Contraseña: {{ usuario.Password }}</li>
+          <li>¿Es Admin?: {{ 'Sí' if usuario.es_admin else 'No' }}</li>
+     </ul>
+</body>
+</html>

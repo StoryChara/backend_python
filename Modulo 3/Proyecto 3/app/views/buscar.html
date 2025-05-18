@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Busqueda</title>
+</head>
+<body>
+     <h1>Buscar Ingrediente o Producto</h1>
+     <form action="buscar" method="POST">
+          <select name="objeto" id="objeto" required>
+               <option value="prod">Producto</option>
+               <option value="ing">Ingrediente</option>
+          </select>
+          <select name="opcion" id="opcion" required onchange="actualizarInput()">
+               <option value="id">ID</option>
+               <option value="name">Nombre</option>
+          </select>
+          <input id="producto" type="number" name="producto" placeholder="Ingrese el ID." required>
+          <button type="submit">Buscar</button>
+     </form>
+
+     {% if message == "Esperando Parámetros." %}
+          <p class="message info">{{ message }}</p>
+     {% elif message == "Elemento NO encontrado." %}
+          <p class="message error">{{ message }}</p>
+     {% elif message == "Exito." %}
+          {% if type == "prod" %}
+          <div class="producto-tarjeta">
+               <h2>{{ resultados.nombre }}</h2>
+               <p><strong>Precio Público:</strong> ${{ resultados.precio_publico }}</p>
+
+               {% if resultados.volumen %}
+                   <p><strong>Volumen:</strong> {{ resultados.volumen }} ml</p>
+               {% endif %}
+
+               {% if resultados.tipo_vaso %}
+                   <p><strong>Tipo de Vaso:</strong> {{ resultados.tipo_vaso }}</p>
+               {% endif %}
+
+               <p><strong>Calorías:</strong> {{ resultados.calorias }} kcal</p>
+
+               <h4>Ingredientes:</h4>
+               <ul>
+                   {% for clave, ingrediente in resultados.ingredientes.items() %}
+                       <li>
+                           <p><strong>{{ ingrediente.nombre }}</strong> {{ '('+ingrediente.sabor+')' if ingrediente.sabor else '' }}</p>
+                           <p>Calorías: {{ ingrediente.calorias }} kcal</p>
+                           <p>¿Es sano? {{ 'Sí' if ingrediente.es_sano else 'No' }}</p>
+                           <p>¿Es vegetariano? {{ 'Sí' if ingrediente.es_vegetariano else 'No' }}</p>
+                       </li><br>
+                   {% endfor %}
+               </ul>
+           </div>
+          {% elif type == "ing" %}
+          <div class="producto-tarjeta">
+               <h2>{{ resultados.nombre }}</h2>
+               <p><strong>Calorias:</strong> {{ resultados.calorias }} kcal</p>
+
+               <p>¿Es sano? {{ 'Sí' if resultados.es_sano else 'No' }}</p>
+               <p>¿Es vegetariano? {{ 'Sí' if resultados.es_vegetariano else 'No' }}</p>
+
+               {% if resultados.sabor %}
+                   <p><strong>Sabor:</strong> {{ resultados.sabor }}</p>
+               {% endif %}
+           </div>
+          {% endif %}
+     {% endif %}
+</body>
+</html>
+
+<script>
+     function actualizarInput() {
+          const select = document.getElementById("opcion");
+          const input = document.getElementById("producto");
+     
+          if (select.value === "id") {
+               input.type = "number";
+               input.placeholder = "Ingrese el ID.";
+          } else {
+               input.type = "text";
+               input.placeholder = "Ingrese el nombre.";
+          }
+     }
+
+     window.onload = actualizarInput;
+</script>

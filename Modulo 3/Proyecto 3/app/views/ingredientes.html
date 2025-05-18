@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Ingredientes</title>
+</head>
+<body>
+    <h1>Bienvenido a los Ingredientes!</h1>
+    {% if productos %}
+        <div class="catalogo-container">
+            {% for nombre, producto in productos.items() %}
+                <div class="producto-tarjeta">
+                    <h2>{{ producto.nombre }}</h2>
+                    <p><strong>Calorias:</strong> {{ producto.calorias }} kcal</p>
+
+                    <p>¿Es sano? {{ 'Sí' if producto.es_sano else 'No' }}</p>
+                    <p>¿Es vegetariano? {{ 'Sí' if producto.es_vegetariano else 'No' }}</p>
+
+                    {% if producto.sabor %}
+                        <p><strong>Sabor:</strong> {{ producto.sabor }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay productos disponibles.</p>
+    {% endif %}
+</body>
+</html>

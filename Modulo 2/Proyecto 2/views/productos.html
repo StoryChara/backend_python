@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Productos</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>
+                <strong>{{ producto.get_nombre() }}</strong>
+                (
+                {% if producto.__class__.__name__ == "Malteada" %}
+                    Malteada
+                {% elif producto.__class__.__name__ == "Copa" %}
+                    Copa
+                {% else %}
+                    Otro
+                {% endif %}
+                ) - ${{ producto.get_precio_publico() }}<br>
+
+                Ingredientes: 
+                {% set ingredientes = producto.get_ingredientes() %}
+                {{ ingredientes[0].get_nombre() }}, 
+                {{ ingredientes[1].get_nombre() }}, 
+                {{ ingredientes[2].get_nombre() }}<br>
+
+                {% if producto.__class__.__name__ == "Malteada" %}
+                    Volumen: {{ producto.get_volumen() }} ml
+                {% elif producto.__class__.__name__ == "Copa" %}
+                    Vaso: {{ producto.get_tipo_vaso() }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

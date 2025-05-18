@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Finanzas</title>
+</head>
+<body>
+     <h1>Finanzas</h1>
+     <form action="finanza" method="POST">
+          <input id="id" type="number" name="id" placeholder="Ingrese el id del producto" required>
+          <button type="submit">Buscar</button>
+     </form>
+
+     {% if message == "Esperando ID." or message == "Elemento NO encontrado." %}
+          <p class="message info">{{ message }}</p>
+     {% else %}
+          <p>Resultados de la búsqueda:</p>
+          Nombre Producto: {{rentabilidad.nombre}}<br>
+          Rentabilidad: $ {{rentabilidad.rentabilidad}}<br>
+          Costo: $ {{costo.costo}}<br>
+     {% endif %}
+</body>
+</html>

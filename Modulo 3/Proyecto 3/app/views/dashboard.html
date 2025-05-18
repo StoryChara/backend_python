@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Dashboard</title>
+</head>
+<body>
+     <h1>Home de la Heladería</h1>
+     <form action="logout"> <button>Cerrar Sesión</button> </form>
+     <form action="auth/profile"> <button>Mi Perfil</button> </form>
+     <form action="catalogo"> <button>Catalogo</button> </form>
+     <form action="calorias"> <button>Calorias</button> </form>
+     <form action="vender"> <button>Venta</button> </form>
+
+     {% if usuario.es_admin %}
+          <form action="finanza"> <button>Finanzas</button> </form>
+     {% endif %}
+
+     {% if usuario.es_empleado or usuario.es_admin %}
+          <form action="ingredientes"> <button>Ingredientes</button> </form>
+          <form action="buscar"> <button>Buscar</button> </form>
+          <form action="inventario"> <button>Inventario</button> </form>
+     {% endif %}
+</body>
+</html>

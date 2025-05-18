@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Inventario</title>
+</head>
+<body>
+     <h1>Inventario</h1>
+     <form action="inventario" method="POST">
+          <select name="opcion" id="opcion" required>
+               <option value="abastecer">Abastecer</option>
+               <option value="renovar">Renovar</option>
+          </select>
+          <input id="id" type="number" name="id" placeholder="Ingrese el ID del ingrediente." required>
+          <div id="cantidad-div" style="display: none;">
+               <input id="cantidad" type="number" name="cantidad" placeholder="Ingrese la cantidad.">
+          </div>
+          <button type="submit">Buscar</button>
+     </form>
+
+     {% if message == 'Esperando ID.' %}
+          <p class="message info">{{ message }}</p>
+     {% else %}
+          {% if resultados.error is defined %}
+               <p class="message error"><strong>Error:</strong> {{ resultados.error }}</p>
+          {% endif %}
+          {% if resultados.message is defined %}
+               <p class="message success"><strong>Mensaje:</strong> {{ resultados.message }}</p>
+          {% endif %}
+     {% endif %}
+
+</body>
+</html>
+
+<script>
+     function toggleCantidadInput() {
+         const opcion = document.getElementById('opcion').value;
+         const cantidadDiv = document.getElementById('cantidad-div');
+         const cantidadInput = document.getElementById('cantidad');
+ 
+         if (opcion === 'renovar') {
+             cantidadDiv.style.display = 'block';
+             cantidadInput.setAttribute('required', 'required');
+         } else {
+             cantidadDiv.style.display = 'none';
+             cantidadInput.removeAttribute('required');
+         }
+     }
+ 
+     document.addEventListener("DOMContentLoaded", function() {
+         toggleCantidadInput();
+         document.getElementById('opcion').addEventListener('change', toggleCantidadInput);
+     });
+ </script>

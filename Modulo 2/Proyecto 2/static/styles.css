@@ -1,0 +1,95 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff8f0;
+    color: #0e0e0e;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    color: #7a64f5;
+    text-align: center;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fail {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+li {
+    background: #fbddff;
+    border: 1px solid #d57bff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #f6eaff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ac50f7;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #7b3bf3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e54fd8;
+}
+
+p strong {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: Consolas, monospace;
+    overflow-x: auto;
+} 

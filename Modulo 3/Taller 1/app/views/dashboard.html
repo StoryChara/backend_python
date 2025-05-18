@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Dashboard</title>
+</head>
+<body>
+     <h1>Home de la Guardería</h1>
+     <form action="logout">
+          <button>Cerrar Sesión</button>
+     </form>
+     <form action="auth/profile">
+          <button>Mi Perfil</button>
+     </form>
+     {% if autorizacion %}
+     <form action="catalogo">
+          <button>Catalogo</button>
+     </form>
+     {% endif %}
+</body>
+</html>

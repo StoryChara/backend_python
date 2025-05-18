@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Finanzas</title>
+</head>
+<body>
+    <h1>Bienvenido al Catalogo!</h1>
+    {% if productos %}
+        <div class="catalogo-container">
+            {% for nombre, producto in productos.items() %}
+                <div class="producto-tarjeta">
+                    <h2>{{ producto.nombre }}</h2>
+                    <p><strong>Precio Público:</strong> ${{ producto.precio_publico }}</p>
+
+                    {% if producto.volumen %}
+                        <p><strong>Volumen:</strong> {{ producto.volumen }} ml</p>
+                    {% endif %}
+
+                    {% if producto.tipo_vaso %}
+                        <p><strong>Tipo de Vaso:</strong> {{ producto.tipo_vaso }}</p>
+                    {% endif %}
+
+                    {% if producto.calorias is defined %}
+                        <p><strong>Calorías:</strong> {{ producto.calorias }} kcal</p>
+                    {% endif %}
+
+                    <h4>Ingredientes:</h4>
+                    <ul>
+                        {% for clave, ingrediente in producto.ingredientes.items() %}
+                            <li>
+                                <p><strong>{{ ingrediente.nombre }}</strong> {{ '('+ingrediente.sabor+')' if ingrediente.sabor else '' }}</p>
+                                {% if ingrediente.calorias is defined %}
+                                    <p>Calorías: {{ ingrediente.calorias }} kcal</p>
+                                {% endif %}
+                                <p>¿Es sano? {{ 'Sí' if ingrediente.es_sano else 'No' }}</p>
+                                <p>¿Es vegetariano? {{ 'Sí' if ingrediente.es_vegetariano else 'No' }}</p>
+                            </li><br>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay productos disponibles.</p>
+    {% endif %}
+</body>
+</html>

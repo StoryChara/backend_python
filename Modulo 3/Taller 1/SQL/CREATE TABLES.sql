@@ -1,0 +1,91 @@
+-- MySQL Script corregido con claves primarias como `ID`
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema TABLAS
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `TABLAS` ;
+CREATE SCHEMA IF NOT EXISTS `TABLAS` ;
+USE `TABLAS` ;
+
+-- -----------------------------------------------------
+-- Table `GUARDERIAS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `GUARDERIAS` ;
+
+CREATE TABLE IF NOT EXISTS `GUARDERIAS` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Direccion` VARCHAR(100) NOT NULL,
+  `Telefono` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `CUIDADORES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CUIDADORES` ;
+
+CREATE TABLE IF NOT EXISTS `CUIDADORES` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(20) NOT NULL,
+  `ID_GUARDERIA` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `IDX_GUARDERIA` (`ID_GUARDERIA` ASC),
+  CONSTRAINT `FK_CUIDADOR_GUARDERIA`
+    FOREIGN KEY (`ID_GUARDERIA`)
+    REFERENCES `GUARDERIAS` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `PERROS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `PERROS` ;
+
+CREATE TABLE IF NOT EXISTS `PERROS` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Raza` VARCHAR(45) NOT NULL,
+  `Edad` INT NOT NULL,
+  `Peso` DECIMAL(10,2) NOT NULL,
+  `ID_GUARDERIA` INT NOT NULL,
+  `ID_CUIDADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `IDX_CUIDADOR` (`ID_CUIDADOR` ASC),
+  INDEX `IDX_GUARDERIA` (`ID_GUARDERIA` ASC),
+  CONSTRAINT `FK_PERRO_CUIDADOR` 
+    FOREIGN KEY (`ID_CUIDADOR`) 
+    REFERENCES `CUIDADORES` (`ID`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PERRO_GUARDERIA` 
+    FOREIGN KEY (`ID_GUARDERIA`) 
+    REFERENCES `GUARDERIAS` (`ID`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `USUARIO`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `USUARIO` ;
+
+CREATE TABLE IF NOT EXISTS `USUARIO` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Username` VARCHAR(120) NOT NULL UNIQUE,
+  `Password` VARCHAR(255) NOT NULL,
+  `es_admin` TINYINT NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+-- Restaurar configuraciones
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

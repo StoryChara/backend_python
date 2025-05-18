@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Sanidad</title>
+</head>
+<body>
+     <h1>Sanidad de Ingrediente o Producto</h1>
+     <form action="calorias" method="POST">
+          <select name="objeto" id="objeto" required>
+               <option value="prod">Producto</option>
+               <option value="ing">Ingrediente</option>
+          </select>
+          <input id="id" type="number" name="id" placeholder="Ingrese el ID." required>
+          <button type="submit">Buscar</button>
+     </form>
+
+     {% if message == "Esperando ID." %}
+          <p class="message info">{{ message }}</p>
+     {% elif message == "Elemento NO encontrado." %}
+          <p class="message error">{{ message }}</p>
+     {% elif message == "Exito." %}
+          {% if type == "prod" %}
+          <div class="producto-tarjeta">
+               <h2>{{ resultados.nombre }}</h2>
+               <p><strong>Calorías:</strong> {{ resultados.calorias }} kcal</p>
+          </div>
+          {% elif type == "ing" %}
+          <div class="producto-tarjeta">
+               <h2>{{ resultados.nombre }}</h2>
+               <p><strong>Calorias:</strong> {{ resultados.calorias }} kcal</p>
+
+               <p>¿Es sano? {{ 'Sí' if resultados.es_sano else 'No' }}</p>
+               <p>¿Es vegetariano? {{ 'Sí' if resultados.es_vegetariano else 'No' }}</p>
+          </div>
+          {% endif %}
+     {% endif %}
+</body>
+</html>

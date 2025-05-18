@@ -1,0 +1,165 @@
+@startuml Proyecto_2
+!theme reddress-darkred
+
+' Interfaces y clases abstractas
+interface IProducto {
+    +calcular_costo(): float
+    +calcular_rentabilidad(): float
+    +calcular_calorias(): float
+}
+
+abstract class Ingrediente {
+    - nombre: str
+    - precio: float
+    - calorias: int
+    - inventario: int
+    - es_vegetariano: bool
+    + get_nombre(): str
+    + get_precio(): float
+    + get_calorias(): int
+    + get_inventario(): int
+    + get_es_vegetariano(): bool
+    + abastecer(): void
+    + gastar(): void
+}
+
+' Subclases de Ingrediente
+class Base {
+    - sabor: str
+    + get_sabor(): str
+    + set_sabor(sabor: str): void
+    + abastecer(): void
+    + gastar(): void
+}
+
+class Complemento {
+    + abastecer(): void
+    + gastar(): void
+}
+
+' Implementaciones de IProducto
+class Copa {
+    - nombre: str
+    - precio_publico: float
+    - tipo_vaso: str
+    - ingrediente1: Ingrediente
+    - ingrediente2: Ingrediente
+    - ingrediente3: Ingrediente
+    + get_nombre(): str
+    + get_precio_publico(): float
+    + get_tipo_vaso(): str
+    + calcular_costo(): float
+    + calcular_rentabilidad(): float
+    + calcular_calorias(): float
+}
+
+class Malteada {
+    - nombre: str
+    - precio_publico: float
+    - volumen: int
+    - ingrediente1: Ingrediente
+    - ingrediente2: Ingrediente
+    - ingrediente3: Ingrediente
+    + get_nombre(): str
+    + get_precio_publico(): float
+    + get_volumen(): int
+    + calcular_costo(): float
+    + calcular_rentabilidad(): float
+    + calcular_calorias(): float
+}
+
+' Clase principal
+class Heladeria {
+    - producto1: IProducto
+    - producto2: IProducto
+    - producto3: IProducto
+    - producto4: IProducto
+    - inventario: list<Ingrediente>
+    - contador_ventas: int
+    + get_productos(): tuple
+    + get_inventario(): list
+    + get_contador_ventas(): int
+    + producto_mas_rentable(): str
+    + vender(nombre_producto: str): bool
+}
+
+' ORM: Modelos para BD
+class IngredienteDB <<ORM>> {
+    +id: int
+    +nombre: str
+    +precio: float
+    +tipo: 'Base' | 'Complemento'
+    +calorias: int
+    +inventario: float
+    +es_vegetariano: bool
+    +sabor: str
+}
+
+class ProductoDB <<ORM>> {
+    +id: int
+    +nombre: str
+    +precio: float
+    +tipo: 'Malteada' | 'Copa'
+    +ingrediente1: int
+    +ingrediente2: int
+    +ingrediente3: int
+    +volumen: float
+    +tipo_vaso: str
+}
+
+' Clases de prueba
+class TestHeladeria <<Test>> {
+    +test_encontrar_mas_rentable(): void
+    +test_vender_producto_exitoso(): void
+    +test_vender_producto_no_existente(): void
+    +test_vender_producto_sin_stock(): void
+}
+
+class TestIngredientes <<Test>> {
+    +test_ingrediente_sano(): void
+    +test_abastecer_ingrediente(): void
+}
+
+class TestProductos <<Test>> {
+    +test_calorias(): void
+    +test_costo_produccion(): void
+    +test_rentabilidad(): void
+}
+
+' Relaciones de implementación y herencia
+IProducto <|.. Copa
+IProducto <|.. Malteada
+
+Ingrediente <|-- Base
+Ingrediente <|-- Complemento
+
+Base -- Copa 
+Complemento -- Copa
+
+Base -- Malteada 
+Complemento -- Malteada
+
+Heladeria "1" -- "4" IProducto 
+Heladeria "1" -- "*" Ingrediente
+
+ProductoDB --> IngredienteDB : ing1
+ProductoDB --> IngredienteDB : ing2
+ProductoDB --> IngredienteDB : ing3
+
+Ingrediente <.. IngredienteDB
+IProducto <.. ProductoDB
+
+' Relaciones con tests
+TestHeladeria ..> Heladeria
+TestHeladeria ..> Copa
+TestHeladeria ..> Base
+TestHeladeria ..> Complemento
+
+TestIngredientes ..> Base
+TestIngredientes ..> Complemento
+
+TestProductos ..> Base
+TestProductos ..> Complemento
+TestProductos ..> Copa
+TestProductos ..> Malteada
+@enduml

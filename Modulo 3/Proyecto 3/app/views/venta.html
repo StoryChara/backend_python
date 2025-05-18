@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Venta</title>
+</head>
+<body>
+     <h1>Venta de Producto</h1>
+     <form action="vender" method="POST">
+          <input id="id" type="number" name="id" placeholder="Ingrese el ID." required>
+          <button type="submit">Buscar</button>
+     </form>
+     {% if message == 'Esperando ID.' %}
+          <p class="message info">{{ message }}</p>
+     {% else %}
+          {% if resultados.error is defined %}
+               <p class="message error"><strong>Error:</strong> {{ resultados.error }}</p>
+          {% endif %}
+          {% if resultados.mensaje is defined %}
+               <p class="message success"><strong>Mensaje:</strong> {{ resultados.mensaje }}</p>
+          {% endif %}
+     {% endif %}
+</body>
+</html>
